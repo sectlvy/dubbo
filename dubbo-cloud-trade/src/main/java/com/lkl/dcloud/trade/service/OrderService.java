@@ -15,7 +15,10 @@ import com.lkl.dcloud.vo.SpUserVo;
 public class OrderService {
 	@Autowired
 	SpOrderMapper spOrderMapper;
-	@Reference
+	//retries=2,
+	@Reference(check=false,cluster="forking",loadbalance="roundrobin")//启动检查关闭，该为测试时使用，服务启动时默认用户服务已经存在 否则会报错
+									 //retries 失败重试2次
+									 //cluster forking 表示并行请求
 	UserService userService;
 	public void submitOrder(String uid){
 		SpOrder spOrder = new SpOrder();

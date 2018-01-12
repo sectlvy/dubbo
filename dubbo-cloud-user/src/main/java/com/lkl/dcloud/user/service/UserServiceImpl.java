@@ -12,7 +12,7 @@ import com.lkl.dcloud.user.dao.gen.SpUserMapper;
 import com.lkl.dcloud.user.dao.gen.bean.SpUser;
 import com.lkl.dcloud.vo.SpUserVo;
 
-@Service(timeout = 5000)
+@Service(timeout = 5000,group="u-public")
 @Component
 public class UserServiceImpl implements UserService {
 	@Autowired

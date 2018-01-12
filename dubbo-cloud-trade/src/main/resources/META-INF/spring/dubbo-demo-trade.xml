@@ -44,4 +44,6 @@ limitations under the License.
     <!-- 加入spring注解扫描 -->  
     <context:component-scan base-package="com.lkl"/>  
     <import resource="common-dao.xml"/>
+    
+    <dubbo:protocol name="dubbo" dispatcher="all" threadpool="fixed" threads="100" />
 </beans>
