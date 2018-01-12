@@ -23,6 +23,24 @@ public class SpOrder {
 
     /**
      *  
+     *  所属表字段为`sp_order`.user_id
+     */
+    private String userId;
+
+    /**
+     *  
+     *  所属表字段为`sp_order`.user_name
+     */
+    private String userName;
+
+    /**
+     *  
+     *  所属表字段为`sp_order`.user_desc
+     */
+    private String userDesc;
+
+    /**
+     *  
      *  所属表字段为`sp_order`.create_time
      */
     private Date createTime;
@@ -107,6 +125,78 @@ public class SpOrder {
 
     /**
      *
+     *`sp_order`.user_id
+     *
+     * @return the value of `sp_order`.user_id
+     *
+     * @mbggenerated
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     *
+     *`sp_order`.user_id
+     *
+     * @param userId the value for `sp_order`.user_id
+     *
+     * @mbggenerated
+     */
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
+    }
+
+    /**
+     *
+     *`sp_order`.user_name
+     *
+     * @return the value of `sp_order`.user_name
+     *
+     * @mbggenerated
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     *
+     *`sp_order`.user_name
+     *
+     * @param userName the value for `sp_order`.user_name
+     *
+     * @mbggenerated
+     */
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    /**
+     *
+     *`sp_order`.user_desc
+     *
+     * @return the value of `sp_order`.user_desc
+     *
+     * @mbggenerated
+     */
+    public String getUserDesc() {
+        return userDesc;
+    }
+
+    /**
+     *
+     *`sp_order`.user_desc
+     *
+     * @param userDesc the value for `sp_order`.user_desc
+     *
+     * @mbggenerated
+     */
+    public void setUserDesc(String userDesc) {
+        this.userDesc = userDesc == null ? null : userDesc.trim();
+    }
+
+    /**
+     *
      *`sp_order`.create_time
      *
      * @return the value of `sp_order`.create_time
@@ -168,6 +258,9 @@ public class SpOrder {
         sb.append(", orderNo=").append(orderNo);
         sb.append(", priceChannel=").append(priceChannel);
         sb.append(", goodNo=").append(goodNo);
+        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", userDesc=").append(userDesc);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append("]");

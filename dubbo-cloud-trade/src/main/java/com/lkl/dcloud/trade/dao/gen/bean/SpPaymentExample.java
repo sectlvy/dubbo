@@ -1,6 +1,6 @@
 package com.lkl.dcloud.trade.dao.gen.bean;
 
-import com.lkl.dcloud.common.Page;
+import com.lkl.dcloud.Page;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

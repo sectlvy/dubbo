@@ -11,8 +11,10 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
         http://code.alibabatech.com/schema/dubbo   
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd   
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">   
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">   
 	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<!-- 基本属性 url、user、password -->
@@ -57,7 +59,7 @@
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lkl.dcloud.trade.dao" />
+		<property name="basePackage" value="com.lkl.dcloud.user.dao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 </beans>

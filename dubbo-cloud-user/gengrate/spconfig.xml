@@ -20,18 +20,18 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- targetProject:自动生成代码的位置 -->
-		<javaModelGenerator targetPackage="com.lkl.dcloud.trade.dao.gen.bean" targetProject="">
+		<javaModelGenerator targetPackage="com.lkl.dcloud.user.dao.gen.bean" targetProject="">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 
-		<sqlMapGenerator targetPackage="com.lkl.dcloud.trade.dao.gen" targetProject="">
+		<sqlMapGenerator targetPackage="com.lkl.dcloud.user.dao.gen" targetProject="">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 
-		<javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.lkl.dcloud.trade.dao.gen" targetProject="">
+		<javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.lkl.dcloud.user.dao.gen" targetProject="">
 			<property name="enableSubPackages" value="true" />
 			<property name="exampleMethodVisibility" value="false" />
 		</javaClientGenerator>
@@ -39,8 +39,7 @@
 
 		
 		 		 
-		<table schema="" tableName="sp_order" domainObjectName="SpOrder"></table>
-		<table schema="" tableName="sp_payment" domainObjectName="SpPayment"></table>
+		<table schema="" tableName="sp_user" domainObjectName="SpUser"></table>
 	</context>
 
 </generatorConfiguration>

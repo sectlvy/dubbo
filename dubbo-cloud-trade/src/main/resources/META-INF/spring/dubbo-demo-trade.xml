@@ -27,21 +27,21 @@ limitations under the License.
         http://code.alibabatech.com/schema/dubbo   
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd   
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"> 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">   
 
-    <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion),
-    don't set it same as provider -->
-    <dubbo:application name="user"/>
+    <!-- provider's application name, used for tracing dependency relationship -->
+    <dubbo:application name="trade"/>
 
-    <!-- use multicast registry center to discover service -->
+    <!-- use multicast registry center to export service -->
     <dubbo:registry address="zookeeper://192.168.168.35:2181/dubbo"/>
 
     <!-- use dubbo protocol to export service on port 20880 -->
-    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:protocol name="dubbo" port="20880"/>
 
     <!-- 使用注解方式暴露接口 -->     
     <dubbo:annotation package="com.lkl" />  
-
-	<context:component-scan base-package="com.lkl"/>  
-	<import resource="common-dao.xml"/>
+      
+    <!-- 加入spring注解扫描 -->  
+    <context:component-scan base-package="com.lkl"/>  
+    <import resource="common-dao.xml"/>
 </beans>

@@ -35,28 +35,5 @@ limitations under the License.
     	<artifactId>dubbo-cloud-api</artifactId>
     	<version>2.5.8</version>
     </dependency>
-    <!-- MySQL 连接驱动依赖 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector}</version>
-		</dependency>
-
-		<!-- Druid 数据连接池依赖 -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.0</version>
-		</dependency>
     </dependencies>
 </project>

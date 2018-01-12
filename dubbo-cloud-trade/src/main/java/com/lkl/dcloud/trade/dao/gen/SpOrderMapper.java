@@ -54,11 +54,13 @@ public interface SpOrderMapper {
      */
     @Insert({
         "insert into `sp_order` (order_no, price_channel, ",
-        "good_no, create_time, ",
-        "update_time)",
+        "good_no, user_id, ",
+        "user_name, user_desc, ",
+        "create_time, update_time)",
         "values (#{orderNo,jdbcType=VARCHAR}, #{priceChannel,jdbcType=DOUBLE}, ",
-        "#{goodNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{updateTime,jdbcType=TIMESTAMP})"
+        "#{goodNo,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, ",
+        "#{userName,jdbcType=VARCHAR}, #{userDesc,jdbcType=VARCHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(SpOrder record);
 
@@ -82,6 +84,9 @@ public interface SpOrderMapper {
         @Result(column="order_no", property="orderNo", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="price_channel", property="priceChannel", jdbcType=JdbcType.DOUBLE),
         @Result(column="good_no", property="goodNo", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_desc", property="userDesc", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -95,7 +100,8 @@ public interface SpOrderMapper {
      */
     @Select({
         "select",
-        "order_no, price_channel, good_no, create_time, update_time",
+        "order_no, price_channel, good_no, user_id, user_name, user_desc, create_time, ",
+        "update_time",
         "from `sp_order`",
         "where order_no = #{orderNo,jdbcType=VARCHAR}"
     })
@@ -103,6 +109,9 @@ public interface SpOrderMapper {
         @Result(column="order_no", property="orderNo", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="price_channel", property="priceChannel", jdbcType=JdbcType.DOUBLE),
         @Result(column="good_no", property="goodNo", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_desc", property="userDesc", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
