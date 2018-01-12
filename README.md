@@ -43,4 +43,36 @@ loadbalance="roundrobin" 基于service 和 reference都可以
 主要用于测试，为了让服务调用方能够不掉用该服务
 ## 不订阅
 <dubbo:registry id="qdRegistry" address="10.20.141.150:9090" subscribe="false" />
-
+## 静态服务
+<dubbo:registry address="10.20.141.150:9090" dynamic="false" />
+需要手动上线的服务，服务提供者初次注册时为禁用状态，需人工启用。断线时，将不会被自动删除，需人工禁用
+## 多协议
+这个比较复杂 后续研究
+有RMI DUBBO HESSION
+## 多注册中心
+<dubbo:registry id="hangzhouRegistry" address="10.20.141.150:9090" />
+## 合并结果扩展
+将多个result合并 <dubbo:method merger="xxx" /> 应用场景 待确定<br/>
+```xml
+ <dubbo:reference id="userService" group="*" interface="com.patty.dubbo.api.service.UserService"
+                     timeout="10000" retries="3" mock="true">
+        <dubbo:method name="findAllUsers" merger="myMerger">
+        </dubbo:method>
+ </dubbo:reference>
+```
+可以有不同的group,比如有2个，然后将查询到的user进行合并
+## 可用组
+<dubbo:reference id="barService" interface="com.foo.BarService" group="*" />
+2.2.0 以上版本支持，总是只调一个可用组的实现
+## 多版本
+```xml
+<dubbo:service interface="com.foo.BarService" version="2.0.0" />
+<dubbo:reference id="barService" interface="com.foo.BarService" version="2.0.0" />
+```
+## 分组聚合
+```xml
+<dubbo:reference interface="com.xxx.MenuService" group="*" merger="true" />
+<dubbo:reference interface="com.xxx.MenuService" group="*">
+    <dubbo:method name="getMenuItems" merger="true" />
+</dubbo:service>
+```
