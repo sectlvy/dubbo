@@ -7,10 +7,20 @@ spring mvc + dubbo + mybatis结构<br/>
 DB采用mysql
 
 
-#启动时检查
+## 启动时检查
 ```java
 	@Reference(check=false)//启动检查关闭，该为测试时使用，服务启动时默认用户服务已经存在 否则会报错
 	UserService userService;
 ```
 默认应该开启，这样可以保证服务在启动时会检查注册中心是否有userService的服务，若无则直接报错
+
+## 错误重试机制
+```java
+@Reference(check=false,retries=2)//retries 失败重试2次
+UserService userService;
+```
+
+也可以用cluster定义自己的[容错机制](https://dubbo.gitbooks.io/dubbo-dev-book/impls/cluster.html)<br/>
+<dubbo:service cluster="failsafe" /> 快速失败<br/>
+cluster="forking" 并行处理，只要有一个成功则成功<br/>
 
