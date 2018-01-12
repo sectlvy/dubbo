@@ -76,3 +76,6 @@ loadbalance="roundrobin" 基于service 和 reference都可以
     <dubbo:method name="getMenuItems" merger="true" />
 </dubbo:service>
 ```
+## validator
+maven 依赖validation-api 和 hibernate-validator
+参考
