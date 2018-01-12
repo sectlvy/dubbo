@@ -1,5 +1,7 @@
 package com.lkl.dcloud.user.service;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,11 @@ public class UserServiceImpl implements UserService {
 	public SpUserVo getSpUser(String id) {
 		SpUser spUser =  spUserMapper.selectByPrimaryKey(id);
 		SpUserVo spUserVo = new SpUserVo();
+		try {
+			TimeUnit.SECONDS.sleep(4);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		BeanUtils.copyProperties(spUser, spUserVo);
 		return spUserVo;
 	}

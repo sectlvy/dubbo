@@ -18,7 +18,9 @@ package com.lkl.dcloud.provider;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Provider {
+import com.lkl.dcloud.trade.service.OrderService;
+
+public class TradeApplication {
 
     public static void main(String[] args) throws Exception {
         //Prevent to get IPV6 address,this way only work in debug mode
@@ -27,6 +29,8 @@ public class Provider {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-trade.xml"});
         context.start();
 
+        OrderService orderService = context.getBean(OrderService.class);
+        orderService.submitOrder("1");
         System.in.read(); // press any key to exit
         
     }

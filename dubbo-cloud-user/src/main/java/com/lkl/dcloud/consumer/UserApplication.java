@@ -22,7 +22,7 @@ import com.lkl.dcloud.DemoService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Consumer {
+public class UserApplication {
 
     public static void main(String[] args) throws IOException {
         //Prevent to get IPV6 address,this way only work in debug mode

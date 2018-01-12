@@ -1,9 +1,15 @@
 package com.lkl.dcloud.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SpUserVo {
+public class SpUserVo implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 688224796911870564L;
+
+	/**
      *  
      *  �?属表字段为`sp_user`.user_id
      */
