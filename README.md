@@ -5,3 +5,12 @@
 # 案例采用框架
 spring mvc + dubbo + mybatis结构<br/>
 DB采用mysql
+
+
+#启动时检查
+```java
+	@Reference(check=false)//启动检查关闭，该为测试时使用，服务启动时默认用户服务已经存在 否则会报错
+	UserService userService;
+```
+默认应该开启，这样可以保证服务在启动时会检查注册中心是否有userService的服务，若无则直接报错
+
