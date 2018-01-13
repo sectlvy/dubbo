@@ -1,4 +1,4 @@
-package com.lkl.dcloud.vo;
+package com.lkl.dcloud.user.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,31 +11,31 @@ public class SpUserVo implements Serializable {
 
 	/**
      *  
-     *  �?属表字段为`sp_user`.user_id
+     *  �?属表字段为`sp_user`.user_id
      */
     private String userId;
 
     /**
      *  
-     *  �?属表字段为`sp_user`.user_name
+     *  �?属表字段为`sp_user`.user_name
      */
     private String userName;
 
     /**
      *  
-     *  �?属表字段为`sp_user`.user_desc
+     *  �?属表字段为`sp_user`.user_desc
      */
     private String userDesc;
 
     /**
      *  
-     *  �?属表字段为`sp_user`.create_time
+     *  �?属表字段为`sp_user`.create_time
      */
     private Date createTime;
 
     /**
      *  
-     *  �?属表字段为`sp_user`.update_time
+     *  �?属表字段为`sp_user`.update_time
      */
     private Date updateTime;
 

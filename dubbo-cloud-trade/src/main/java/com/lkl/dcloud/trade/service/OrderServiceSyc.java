@@ -17,35 +17,42 @@ import com.lkl.dcloud.user.vo.SpOrderCountVo;
 import com.lkl.dcloud.user.vo.SpUserVo;
 
 @Component
-public class OrderService {
+public class OrderServiceSyc {
 	@Autowired
 	SpOrderMapper spOrderMapper;
 	//retries=2,
-	@Reference(check=true,loadbalance="roundrobin",group="*")//启动检查关闭，该为测试时使用，服务启动时默认用户服务已经存在 否则会报错
-									 //retries 失败重试2次
-									 //cluster forking 表示并行请求
-	UserService userService;
-	@Reference
-	UserCountService userCountService;
+	@Reference(async=true,group="*")
+	UserService userServiceSyc;
+	@Reference(async=true)
+	UserCountService userCountServiceSyc;
 	@Transactional
-	public void submitOrder(String uid){
+	public void submitSycOrder(String uid) throws Exception{
 		SpOrder spOrder = new SpOrder();
 		spOrder.setCreateTime(new Date());
 		spOrder.setGoodNo(getRand("GD"));
 		spOrder.setOrderNo(getRand("OD"));
 		spOrder.setPriceChannel(11D);
 		
-		SpUserVo spUserVo = userService.getSpUser(uid);
+		SpUserVo spUserVo = userServiceSyc.getSpUser(uid);//返回null
+		
+		Future<SpUserVo> ufuture = RpcContext.getContext().getFuture();
+		
+		SpOrderCountVo spOrderCountVo = new SpOrderCountVo();
+		spOrderCountVo.setOrderNo(spOrder.getOrderNo());//若注释掉则会报 ConstraintViolationImpl{interpolatedMessage='订单号不能为空',
+		spOrderCountVo.setUserId(uid);
+		Integer fut = userCountServiceSyc.addOrderCount(spOrderCountVo);
+		Future<Integer> countFuter = RpcContext.getContext().getFuture();
+		
+		
+		spUserVo = ufuture.get();
+		fut = countFuter.get();
+		
 		
 		spOrder.setUserDesc(spUserVo.getUserDesc());
 		spOrder.setUserId(spUserVo.getUserId());
 		spOrder.setUserName(spUserVo.getUserName());
 		spOrderMapper.insert(spOrder);
 		
-		SpOrderCountVo spOrderCountVo = new SpOrderCountVo();
-		spOrderCountVo.setOrderNo(spOrder.getOrderNo());//若注释掉则会报 ConstraintViolationImpl{interpolatedMessage='订单号不能为空',
-		spOrderCountVo.setUserId(spUserVo.getUserId());
-		userCountService.addOrderCount(spOrderCountVo);
 	}
 	
 	private String getRand(String pre){

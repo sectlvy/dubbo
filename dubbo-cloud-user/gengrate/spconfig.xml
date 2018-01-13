@@ -40,6 +40,7 @@
 		
 		 		 
 		<table schema="" tableName="sp_user" domainObjectName="SpUser"></table>
+		<table schema="" tableName="sp_user_count" domainObjectName="SpUserCount"></table>
 	</context>
 
 </generatorConfiguration>

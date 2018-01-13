@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.lkl.dcloud.UserService;
+import com.lkl.dcloud.user.UserService;
 import com.lkl.dcloud.user.dao.gen.SpUserMapper;
 import com.lkl.dcloud.user.dao.gen.bean.SpUser;
-import com.lkl.dcloud.vo.SpUserVo;
+import com.lkl.dcloud.user.vo.SpUserVo;
 
 @Service(timeout = 5000,group="u-public")
 @Component
