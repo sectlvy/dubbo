@@ -78,4 +78,113 @@ loadbalance="roundrobin" 基于service 和 reference都可以
 ```
 ## validator
 maven 依赖validation-api 和 hibernate-validator
-参考
+参考com.lkl.dcloud.trade.service.OrderService
+```java
+		SpOrderCountVo spOrderCountVo = new SpOrderCountVo();
+		spOrderCountVo.setOrderNo(spOrder.getOrderNo());//若注释掉则会报 ConstraintViolationImpl{interpolatedMessage='订单号不能为空',
+		spOrderCountVo.setUserId(spUserVo.getUserId());
+		userCountService.addOrderCount(spOrderCountVo);
+```
+当然要抛出更友好的异常还需要根据业务系统做具体的拦截
+## 缓存
+<dubbo:reference interface="com.foo.BarService" cache="lru" />
+## 泛化引用 pass
+主要用于框架代码编写，可以获取一个任意接口，通过invoke()方法和方法字符串调用
+## 泛化实现
+```java
+package com.foo;
+public class MyGenericService implements GenericService {
+
+    public Object $invoke(String methodName, String[] parameterTypes, Object[] args) throws GenericException {
+        if ("sayHello".equals(methodName)) {
+            return "Welcome " + args[0];
+        }
+    }
+}
+```
+## 回声测试 
+
+## 上下文信息
+```java
+// 远程调用
+xxxService.xxx();
+// 本端是否为消费端，这里会返回true
+boolean isConsumerSide = RpcContext.getContext().isConsumerSide();
+// 获取最后一次调用的提供方IP地址
+String serverIP = RpcContext.getContext().getRemoteHost();
+// 获取当前服务配置信息，所有配置信息都将转换为URL的参数
+String application = RpcContext.getContext().getUrl().getParameter("application");
+// 注意：每发起RPC调用，上下文状态会变化
+```
+## 隐式参数
+```java
+RpcContext.getContext().setAttachment("index", "1"); // 隐式传参，后面的远程调用都会隐式将这些参数发送到服务器端，类似cookie，用于框架集成，不建议常规业务使用
+xxxService.xxx(); // 远程调用
+```
+类似日志链路追踪
+## 异步调用
+服务支持异步(不建议使用，异步一般有调用方决定)
+```java
+@Service(timeout = 5000,group="u-public",async=true)
+@Component
+public class UserServiceImpl implements UserService {
+....
+}
+```
+reference支持异步调用
+
+不成功，注释貌似不好用，暂时pass OrderServiceSyc
+## 参数回调
+参数回调方式与调用本地 callback 或 listener 相同,Dubbo 将基于长连接生成反向代理,应该很消耗服务器资源
+## 事件通知
+异步回调模式：async=true onreturn="xxx"
+同步回调模式：async=false onreturn="xxx" 
+可以用于分布式事务
+## 本地伪装
+<dubbo:service interface="com.foo.BarService" mock="com.foo.BarServiceMock" />
+## 延迟暴露
+```xml
+<dubbo:service delay="-1" /> 
+<dubbo:service delay="5000" /> 延迟5秒
+```
+## 并发限制
+```xml
+<dubbo:service interface="com.foo.BarService" actives="10" />
+```
+## 连接控制
+```xml
+<dubbo:provider protocol="dubbo" accepts="10" />
+<dubbo:reference interface="com.foo.BarService" connections="10" />
+```
+## 粘滞连接
+粘滞连接用于有状态服务，尽可能让客户端总是向同一提供者发起调用
+```xml
+<dubbo:protocol name="dubbo" sticky="true" />
+```
+## 路由规则
+## 配置规则
+类似服务降级等
+## 优雅停机
+停止时，不再发起新的调用请求，所有新的调用在客户端即报错。
+停止时，先标记为不接收新请求，新请求过来时直接报错，让客户端重试其它机器。
+## 日志
+```xml
+<dubbo:application logger="log4j" />
+logback待验证
+<dubbo:protocol accesslog="true" />
+将当前日志输出到 对应的日志 在admin后台可以查看
+
+```
+
+## 容器启动
+
+    启动一个内嵌 Jetty，用于汇报状态。
+    配置：
+        dubbo.jetty.port=8080：配置 jetty 启动端口
+        dubbo.jetty.directory=/foo/bar：配置可通过 jetty 直接访问的目录，用于存放静态文件
+        dubbo.jetty.page=log,status,system：配置显示的页面，缺省加载所有页面
+## netty4
+```java
+<dubbo:provider server="netty4" />
+<dubbo:consumer client="netty4" />
+```
