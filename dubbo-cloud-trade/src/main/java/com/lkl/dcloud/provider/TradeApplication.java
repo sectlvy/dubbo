@@ -16,10 +16,6 @@
  */
 package com.lkl.dcloud.provider;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.lkl.dcloud.trade.service.OrderService;
-import com.lkl.dcloud.trade.service.OrderServiceSyc;
 
 public class TradeApplication {
 
@@ -30,6 +26,7 @@ public class TradeApplication {
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-trade.xml"});
 //        context.start();
 
+        args = new String[]{"spring","jetty","log4j"};
         com.alibaba.dubbo.container.Main.main(args);
 //        OrderService orderService = context.getBean(OrderService.class);
 //        orderService.submitOrder("1");

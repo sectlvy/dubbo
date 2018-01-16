@@ -28,7 +28,7 @@ public class OrderService {
 	@Reference
 	UserCountService userCountService;
 	@Transactional
-	public void submitOrder(String uid){
+	public SpOrder submitOrder(String uid){
 		SpOrder spOrder = new SpOrder();
 		spOrder.setCreateTime(new Date());
 		spOrder.setGoodNo(getRand("GD"));
@@ -46,6 +46,8 @@ public class OrderService {
 		spOrderCountVo.setOrderNo(spOrder.getOrderNo());//若注释掉则会报 ConstraintViolationImpl{interpolatedMessage='订单号不能为空',
 		spOrderCountVo.setUserId(spUserVo.getUserId());
 		userCountService.addOrderCount(spOrderCountVo);
+		
+		return spOrder;
 	}
 	
 	private String getRand(String pre){
