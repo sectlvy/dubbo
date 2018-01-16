@@ -16,24 +16,26 @@
  */
 package com.lkl.dcloud.provider;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TradeApplication {
+import com.lkl.dcloud.trade.service.OrderServiceSyc;
+
+
+public class TradePApplication {
 
     public static void main(String[] args) throws Exception {
         //Prevent to get IPV6 address,this way only work in debug mode
         //But you can pass use -Djava.net.preferIPv4Stack=true,then it work well whether in debug mode or not
         System.setProperty("java.net.preferIPv4Stack", "true");
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-trade.xml"});
-//        context.start();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-trade.xml"});
+        context.start();
 
-        args = new String[]{"jettyApi","log4j"};
-        com.alibaba.dubbo.container.Main.main(args);
 //        OrderService orderService = context.getBean(OrderService.class);
 //        orderService.submitOrder("1");
         
-//        OrderServiceSyc orderServiceSyc = context.getBean(OrderServiceSyc.class);
-//        orderServiceSyc.submitSycOrder("1");
-//        System.in.read(); // press any key to exit
+        OrderServiceSyc orderServiceSyc = context.getBean(OrderServiceSyc.class);
+        orderServiceSyc.submitSycOrder("1");
+        System.in.read(); // press any key to exit
         
     }
 

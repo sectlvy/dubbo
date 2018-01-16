@@ -21,17 +21,18 @@ limitations under the License.
     xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
 	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
     xsi:schemaLocation="http://www.springframework.org/schema/beans   
         http://www.springframework.org/schema/beans/spring-beans.xsd   
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
-        http://code.alibabatech.com/schema/dubbo   
-        http://code.alibabatech.com/schema/dubbo/dubbo.xsd   
+        http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd  
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">   
 
     <!-- provider's application name, used for tracing dependency relationship -->
     <dubbo:application name="trade"/>
-
+	<mvc:annotation-driven />
     <!-- use multicast registry center to export service -->
     <dubbo:registry address="zookeeper://192.168.168.35:2181/dubbo"/>
 

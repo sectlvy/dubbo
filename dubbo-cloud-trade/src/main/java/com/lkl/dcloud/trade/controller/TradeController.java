@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.lkl.dcloud.trade.dao.gen.bean.SpOrder;
 import com.lkl.dcloud.trade.service.OrderService;
 
-@RequestMapping("/trade")
+@RequestMapping("trade")
 @RestController
 public class TradeController {
 	@Autowired
