@@ -1,16 +1,8 @@
 package com.lkl.dcloud.extension;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.nio.SelectChannelConnector;
-import org.mortbay.jetty.servlet.DefaultServlet;
-import org.mortbay.jetty.servlet.ServletHandler;
-import org.mortbay.jetty.servlet.ServletHolder;
 import org.mortbay.jetty.webapp.WebAppContext;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.servlet.ResourceServlet;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
@@ -18,11 +10,11 @@ import com.alibaba.dubbo.common.utils.ConfigUtils;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.container.Container;
 import com.alibaba.dubbo.container.jetty.JettyContainer;
-import com.alibaba.dubbo.remoting.http.servlet.DispatcherServlet;
 
 public class JettyApiContainer implements Container {
 
     public static final String JETTY_PORT = "dubbo.jetty.port2";
+    public static final String JETTY_WEB_XML = "dubbo.jetty.webxml";
     public static final String JETTY_DIRECTORY = "dubbo.jetty.directory";
     public static final int DEFAULT_JETTY_PORT = 8080;
     private static final Logger logger = LoggerFactory.getLogger(JettyContainer.class);
@@ -46,25 +38,11 @@ public class JettyApiContainer implements Container {
         server.addConnector(connector);
         
         
-        WebAppContext webContext = new WebAppContext(DEFAULT_WEBAPP_PATH, "");
-        ContextLoaderListener listener = new ContextLoaderListener();
-        Map initParams = new HashMap<String,String>();
-        initParams.put("contextConfigLocation", "classpath:META-INF/spring/*.xml");
-        webContext.setInitParams(initParams);
-//        webContext.setInitParameter("contextConfigLocation", "mvc-config.xml");
-
-        webContext.setResourceBase(DEFAULT_WEBAPP_PATH);
-        webContext.addEventListener(listener);
-
+        WebAppContext webContext = new WebAppContext(DEFAULT_WEBAPP_PATH, "/");
+        String webXml = ConfigUtils.getProperty(JETTY_WEB_XML)==null?"src\\main\\webapp\\WEB-INF\\web.xml": ConfigUtils.getProperty(JETTY_WEB_XML);
         
-        
-
-        webContext.setDescriptor("web.xml");
+        webContext.setDescriptor(webXml);
         // 设置webapp的位置
-
-//        webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
-//        webContext.setErrorHandler(null);
-//        webContext.addServlet(new ServletHolder(new DispatcherServlet(context)), "/*");
 
         server.setHandler(webContext);
         

@@ -26,7 +26,7 @@ public class TradeApplication {
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-trade.xml"});
 //        context.start();
 
-        args = new String[]{"jettyApi","log4j"};
+        args = new String[]{"jettyApi","jetty","log4j"};
         com.alibaba.dubbo.container.Main.main(args);
 //        OrderService orderService = context.getBean(OrderService.class);
 //        orderService.submitOrder("1");
