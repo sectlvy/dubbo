@@ -38,10 +38,8 @@ limitations under the License.
 
     <!-- use dubbo protocol to export service on port 20880 -->
     <dubbo:protocol name="dubbo" port="20881"/>
-
     <!-- 使用注解方式暴露接口 -->     
     <dubbo:annotation package="com.lkl" />  
-
 	<context:component-scan base-package="com.lkl"/>  
 	<import resource="common-dao.xml"/>
 </beans>
